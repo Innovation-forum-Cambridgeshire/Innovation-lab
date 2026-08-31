@@ -12,8 +12,8 @@ verification script.
   shared data tier by the environment variables already set.
 - Schema changes are versioned, ordered and idempotent — re-running a migration
   must not change row counts. See
-  [the schema and CDE register](https://innovation-forum-cambridgeshire.github.io/Innovation-lab/04-schema-and-cdes/)
-  for the pattern.
+  `wiki/04-schema-and-cdes.md` (Public_Challenge; read it with
+  `uv run python scripts/dev.py docs`) for the pattern.
 - Prefer a check that fails loudly over a report nobody reads.
 
 ## House rule
