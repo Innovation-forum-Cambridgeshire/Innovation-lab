@@ -29,9 +29,11 @@ container knowledge, with screenshots of the real application. It lives in
 Public_Challenge at `wiki/12-sop-devcontainer.md`, so reading it needs
 organisation access — see **Documentation** below.
 
-The environment arrives prebuilt: `pandas`, `numpy`, `pyarrow`, `matplotlib`,
-`plotly`, `jupyterlab`, `sqlalchemy`, and clients for PostgreSQL, Redis and
-MinIO. Startup is seconds because nothing is compiled locally.
+The environment carries `pandas`, `numpy`, `pyarrow`, `matplotlib`, `plotly`,
+`jupyterlab`, `sqlalchemy`, and clients for PostgreSQL, Redis and MinIO.
+
+Your **first** create builds the image and takes a couple of minutes. Every
+create after that is seconds, because the layers are cached on your machine.
 
 ## Data
 
@@ -91,21 +93,19 @@ database and no container, so it works before you have set anything else up.
 
 ## Where the environment comes from
 
-`.devcontainer/devcontainer.json` references a published image:
+`.devcontainer/devcontainer.json` builds `.devcontainer/Dockerfile`, which sits
+right there in this repository. Nothing is pulled from a registry, so nothing
+about opening this workspace depends on having access to anything private.
 
-```
-ghcr.io/innovation-forum-cambridgeshire/lab-devcontainer:latest
-```
+That Dockerfile is **generated**, and says so in its first line. The real
+definition lives in Public_Challenge and is mirrored here whenever it changes.
+One definition, one place to change it — the same reason this organisation's
+documents derive their figures instead of retyping them.
 
-It is built from
-`.devcontainer/Dockerfile` in Public_Challenge
-and republished when that file changes. Referencing one image rather than
-copying the setup into every lab repository means there is a single definition
-to maintain — the same reason this organisation's documents derive their
-figures instead of retyping them.
-
-To add a tool for everyone, change the Dockerfile in Public_Challenge. To add
-one for yourself, `uv pip install` it in your workspace.
+An edit made to the Dockerfile in this repository is lost on the next sync,
+without warning. To add a tool for everyone, change it in Public_Challenge, or
+open an issue here if you cannot reach that repository. To add one just for
+yourself, `uv pip install` it in your workspace.
 
 ## Conventions
 
