@@ -1,17 +1,27 @@
 // Innovation Lab dev container.
 //
-// This references a published image rather than carrying its own container
-// setup. The image is built from Public_Challenge/.devcontainer/Dockerfile and
-// pushed to GHCR, so there is one definition to maintain instead of a copy
-// per lab repository. A copy drifts the moment either side moves; a reference
-// does not.
+// This builds its own image from the Dockerfile beside it, rather than pulling
+// a published one. It used to pull, on the reasoning that a copy drifts and a
+// reference does not -- sound reasoning that still failed, for a reason outside
+// it: the published image lives in a private GHCR package, so `devpod up` on
+// this repository died at the pull with "UNAUTHORIZED: authentication required"
+// before any of it mattered.
+//
+// Building takes about a minute and a half on a first create, once. After that
+// the layers are cached and creates are as quick as pulling would have been.
+//
+// The Dockerfile is GENERATED from Public_Challenge, which holds the real
+// definition, and says so in its first line. Editing it here loses the edit on
+// the next sync.
 //
 // It expects the Public_Challenge data tier to be running on the SAME machine.
 // See the "Data" section of the root README for what that means and how to
 // start it.
 {
   "name": "Innovation Lab",
-  "image": "ghcr.io/innovation-forum-cambridgeshire/lab-devcontainer:latest",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
 
   // host.docker.internal is how a container reaches a service published on the
   // host. host-gateway makes it resolve on Linux too, where it is not built in.
