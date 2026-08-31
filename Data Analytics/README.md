@@ -15,7 +15,8 @@ non-specialist can act on without reading the code behind it.
   the header and a source note under every exhibit.
 - Keep the words and the numbers apart. Prose belongs in a content file, not
   interleaved with layout code — the reasoning is in
-  [the WS-3 decision](https://innovation-forum-cambridgeshire.github.io/Innovation-lab/10-decisions/).
+  the WS-3 decision in `wiki/10-decisions.md` (Public_Challenge; read it with
+  `uv run python scripts/dev.py docs`).
 
 ## House rule
 
