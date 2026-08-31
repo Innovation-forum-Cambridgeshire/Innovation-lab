@@ -12,7 +12,7 @@ verification script.
   shared data tier by the environment variables already set.
 - Schema changes are versioned, ordered and idempotent — re-running a migration
   must not change row counts. See
-  [scripts/db/migrations](https://github.com/Innovation-forum-Cambridgeshire/Public_Challenge/tree/main/scripts/db/migrations)
+  [the schema and CDE register](https://innovation-forum-cambridgeshire.github.io/Innovation-lab/04-schema-and-cdes/)
   for the pattern.
 - Prefer a check that fails loudly over a report nobody reads.
 
