@@ -65,5 +65,33 @@
     }
   },
 
+  // Without these, nothing this workspace serves is reachable from a browser.
+  // JupyterLab, Streamlit and Chainlit all run inside the container and
+  // nothing publishes them -- the README told people to run `jupyter lab` and
+  // the port it opens went nowhere.
+  //
+  // Chainlit defaults to 8000, which is also what `dev.py docs` uses in the
+  // neighbouring workspace. Two forwarded 8000s collide on the host, so the
+  // sample is run on 8100 and this says so.
+  "forwardPorts": [
+    8888,
+    8501,
+    8100
+  ],
+  "portsAttributes": {
+    "8888": {
+      "label": "JupyterLab",
+      "onAutoForward": "notify"
+    },
+    "8501": {
+      "label": "Streamlit (Data Science sample)",
+      "onAutoForward": "notify"
+    },
+    "8100": {
+      "label": "Chainlit (Data Engineering sample)",
+      "onAutoForward": "notify"
+    }
+  },
+
   "remoteUser": "vscode"
 }

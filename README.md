@@ -30,7 +30,19 @@ Public_Challenge at `wiki/12-sop-devcontainer.md`, so reading it needs
 organisation access — see **Documentation** below.
 
 The environment carries `pandas`, `numpy`, `pyarrow`, `matplotlib`, `plotly`,
-`jupyterlab`, `sqlalchemy`, and clients for PostgreSQL, Redis and MinIO.
+`jupyterlab`, `sqlalchemy`, clients for PostgreSQL, Redis and MinIO, and the
+two application frameworks with their libraries: **Streamlit + scikit-learn**
+and **Chainlit + Great Expectations**.
+
+There is a working sample of each, meant to be replaced rather than kept:
+
+| | Run it | Then open |
+|---|---|---|
+| `Data Science/streamlit_app.py` | `streamlit run streamlit_app.py --server.address 0.0.0.0 --server.port 8501` | http://localhost:8501 |
+| `Data Engineering/chainlit_app.py` | `chainlit run chainlit_app.py --host 0.0.0.0 --port 8100` | http://localhost:8100 |
+
+Both bind `0.0.0.0` on purpose. Bound to loopback inside a container, the
+forwarded port reaches nothing.
 
 Your **first** create builds the image and takes a couple of minutes. Every
 create after that is seconds, because the layers are cached on your machine.

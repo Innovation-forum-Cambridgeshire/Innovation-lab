@@ -32,7 +32,10 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
 
 # Baked into the image so a lab workspace starts in seconds rather than
 # resolving and downloading on every create. Kept to the things a data
-# analytics / science / engineering workspace actually opens with.
+# analytics / science / engineering workspace actually opens with -- which
+# now includes the two application frameworks the cohort is taught on:
+# Streamlit for a model someone can click, and Chainlit for a data-quality
+# assistant someone can talk to.
 ENV LAB_VENV=/opt/lab-venv
 RUN uv venv "$LAB_VENV" --python 3.11 \
     && VIRTUAL_ENV="$LAB_VENV" uv pip install --python "$LAB_VENV/bin/python" \
@@ -42,6 +45,17 @@ RUN uv venv "$LAB_VENV" --python 3.11 \
         "psycopg[binary]" redis minio \
         sqlalchemy \
         pytest ruff \
+        \
+        # The four below are pinned where the rest are not, on purpose. They
+        # are the surface a cohort is taught on, and an upstream release the
+        # night before costs everyone their morning. The versions are the ones
+        # actually verified together against this image's pandas: an install
+        # is not evidence, so great-expectations was run through a real
+        # validation on a real table before being written down here.
+        streamlit==1.62.0 \
+        scikit-learn==1.9.0 \
+        chainlit==2.12.0 \
+        "great-expectations==1.22.0" \
     && chmod -R a+rX "$LAB_VENV"
 
 # Both the container's own env and any `uv run` in a lab repo resolve here,
