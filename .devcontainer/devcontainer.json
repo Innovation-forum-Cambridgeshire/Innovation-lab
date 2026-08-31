@@ -1,0 +1,59 @@
+// Innovation Lab dev container.
+//
+// This references a published image rather than carrying its own container
+// setup. The image is built from Public_Challenge/.devcontainer/Dockerfile and
+// pushed to GHCR, so there is one definition to maintain instead of a copy
+// per lab repository. A copy drifts the moment either side moves; a reference
+// does not.
+//
+// It expects the Public_Challenge data tier to be running on the SAME machine.
+// See the "Data" section of the root README for what that means and how to
+// start it.
+{
+  "name": "Innovation Lab",
+  "image": "ghcr.io/innovation-forum-cambridgeshire/lab-devcontainer:latest",
+
+  // host.docker.internal is how a container reaches a service published on the
+  // host. host-gateway makes it resolve on Linux too, where it is not built in.
+  "runArgs": ["--add-host=host.docker.internal:host-gateway"],
+
+  "containerEnv": {
+    // The Public_Challenge data tier publishes these on the host. Its own
+    // containers are on a different compose network, so the lab reaches them
+    // through the host rather than by service name.
+    "ACME_PG_HOST": "host.docker.internal",
+    "ACME_PG_PORT": "12864",
+    "ACME_REDIS_HOST": "host.docker.internal",
+    "ACME_REDIS_PORT": "12865",
+    "ACME_MINIO_HOST": "host.docker.internal",
+    "ACME_MINIO_API_PORT": "12866",
+    "ACME_MINIO_UI_PORT": "12867",
+    "PGHOST": "host.docker.internal",
+    "PGPORT": "12864",
+    "PGUSER": "acme",
+    "PGPASSWORD": "acme_dev_only",
+    "PGDATABASE": "acme_sad"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "charliermarsh.ruff",
+        "ckolkman.vscode-postgres",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        // The image builds its environment at /opt/lab-venv, outside any
+        // bind-mounted workspace, so host and container never share one.
+        "python.defaultInterpreterPath": "/opt/lab-venv/bin/python",
+        "editor.formatOnSave": true,
+        "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
+      }
+    }
+  },
+
+  "remoteUser": "vscode"
+}
