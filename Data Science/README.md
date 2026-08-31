@@ -16,6 +16,25 @@ with the uncertainty attached.
   it documentation pretending to be a check. There is a worked example at
   `notebooks/document-lifecycle.ipynb` in Public_Challenge.
 
+## The sample application
+
+`streamlit_app.py` predicts whether a knowledge asset is under-documented, and
+is meant to be replaced by your own work rather than kept.
+
+```bash
+streamlit run streamlit_app.py --server.address 0.0.0.0 --server.port 8501
+```
+
+Then open **http://localhost:8501**. `--server.address 0.0.0.0` is not optional
+inside a container: bound to loopback the port is forwarded to nothing.
+
+It is honest about a real limitation. `knowledge_asset` holds five rows, which
+cannot train anything, so the app fits distributions to the real columns and
+samples a training set from them — and says so on the page, including which
+parts carry over from the real data and which do not. A model demonstrated on
+invented data is fine. A model demonstrated on invented data that pretends
+otherwise is not.
+
 ## House rule
 
 If a scenario labelled "worst" outperforms one labelled "best", the parameters
