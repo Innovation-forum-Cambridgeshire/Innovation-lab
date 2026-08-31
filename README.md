@@ -24,10 +24,10 @@ devpod up https://github.com/Innovation-forum-Cambridgeshire/Innovation-lab --id
 Or in the DevPod desktop app: **Create Workspace**, paste that URL under
 **Git Repo**, choose the `docker` provider and **VS Code**.
 
-New to any of this? The illustrated walkthrough is
-[SOP 12](https://innovation-forum-cambridgeshire.github.io/Innovation-lab/12-sop-devcontainer/)
-— it assumes no container knowledge and the screenshots are of the real
-application.
+New to any of this? There is an illustrated walkthrough that assumes no
+container knowledge, with screenshots of the real application. It lives in
+Public_Challenge at `wiki/12-sop-devcontainer.md`, so reading it needs
+organisation access — see **Documentation** below.
 
 The environment arrives prebuilt: `pandas`, `numpy`, `pyarrow`, `matplotlib`,
 `plotly`, `jupyterlab`, `sqlalchemy`, and clients for PostgreSQL, Redis and
@@ -41,9 +41,7 @@ Public_Challenge, which must be running **on the same machine**.
 > **This step needs organisation access.** Public_Challenge is a private
 > repository, so the clone below only works once you have been admitted to the
 > Innovation Forum organisation. Everything else on this page — the dev
-> container, the folders, the toolchain — works without it. The
-> [documentation](https://innovation-forum-cambridgeshire.github.io/Innovation-lab/)
-> is public either way.
+> container, the folders, the toolchain — works without it.
 
 ```bash
 git clone https://github.com/Innovation-forum-Cambridgeshire/Public_Challenge
@@ -72,8 +70,24 @@ neighbour being up.
 
 > DevPod forwards ports 12864-12867 to your host while a workspace exists, and
 > stopping the workspace does not release them. If the Public_Challenge tier
-> will not bind, that is usually why —
-> [the details are here](https://innovation-forum-cambridgeshire.github.io/Innovation-lab/12-sop-devcontainer/#63-ports-12864-12867-are-already-in-use-on-your-own-machine).
+> will not bind, that is usually why. Section 6.3 of `wiki/12-sop-devcontainer.md`
+> in Public_Challenge has the commands to find and free them.
+
+## Documentation
+
+The architecture documents, the decision log and both standard operating
+procedures live in Public_Challenge, under `wiki/`. **They are not published to
+a website.** They are for admitted participants, and being admitted is what
+gives you the repository that holds them:
+
+```bash
+git clone https://github.com/Innovation-forum-Cambridgeshire/Public_Challenge
+cd Public_Challenge
+uv run python scripts/dev.py docs        # then http://localhost:8000
+```
+
+That serves the whole set as a searchable site on your own machine. It needs no
+database and no container, so it works before you have set anything else up.
 
 ## Where the environment comes from
 
