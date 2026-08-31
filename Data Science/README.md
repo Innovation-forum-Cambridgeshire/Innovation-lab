@@ -14,7 +14,7 @@ with the uncertainty attached.
   a diff and leak whatever the cells printed into the repository history.
 - Make notebooks assert. A notebook that only prints cannot fail, which makes
   it documentation pretending to be a check. There is a worked example at
-  [document-lifecycle.ipynb](https://github.com/Innovation-forum-Cambridgeshire/Public_Challenge/blob/main/notebooks/document-lifecycle.ipynb).
+  `notebooks/document-lifecycle.ipynb` in Public_Challenge.
 
 ## House rule
 
